@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue中的插值式---最初的自己练习</title>
+</head>
+<body>
+	<div id="app">
+		{{ msg }}
+	<br>
+		{{ message.split(",").reverse().join(",")}}
+	</div>
+</body>
+<!-- 最笨的引入vue.js文件 -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	//创建vue的实例化
+	var vm=new Vue({
+		el:"#app",
+		data:{
+			msg:"hello world",
+			message:"1,2,3,4"    //需求:将字符串反转,  先将其转换成数组split, 再反转reverse(这是数组的方法), 再转回字符串join
+		}
+	});
+</script>
+</html>

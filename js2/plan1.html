@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue中的过滤器</title>
+</head>
+<body>
+	<div id="app1" v-cloak>
+		{{ msg | toUpper }}
+	</div>
+
+	<div id="app2">
+		{{ msg2 | toUpper }}
+	</div>
+</body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script type="text/javascript">
+	//实例化vue对象vm1
+	var vm1=new Vue({
+		el: "#app1",
+		data: {
+			msg: "hi"
+		},
+
+		//过滤器(也就是格式化)
+		filters: {
+			//定义方法(将第一个字母转换成大写的方法)
+			toUpper(value){
+				return value.charAt(0).toUpperCase() + value.substr(1);
+
+				//value参数就是数据
+			}
+
+		}
+	});
+
+
+	//实例化vue对象vm2
+
+	//定义一个全局过滤器
+	Vue.filter("toUpper",function(value){
+		return value.charAt(0).toUpperCase() + value.substr(1);
+	});
+
+	var vm2=new Vue({
+		el: "#app2",
+		data: {
+			msg2: "hello"
+		}
+	});
+</script>
+</html>

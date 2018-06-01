@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>axios发送请求(axios和vue没有关系)</title>
+</head>
+<body>
+	
+</body>
+<!-- 引入axios文件 -->
+<script src="../node_modules/axios/dist/axios.js"></script>
+
+<script type="text/javascript">
+	//axios发送get请求,来获取所有的数据
+	// axios.get("http://localhost:3000/brands")
+	// 	.then((res) => {
+	// 		console.log(res.data);
+	// 	})
+	// 	.catch((error) => {
+	// 		console.log(error);
+	// 	});
+
+
+
+	//axios发送get请求, 根据id获取某一个
+	// axios.get("http://localhost:3000/brands/10")
+	// 	.then((res) => {
+	// 		console.log(res.data);
+	// 	})
+	// 	.catch((error) => {
+	// 		console.log(error);
+	// 	});
+
+
+
+	//axios发送post请求,来添加数据
+	// axios.post("http://localhost:3000/brands",{
+	// 	name: "xyz",
+	// 	date: "2018-06-01"
+	// })
+	// 	.then((res) => {
+	// 		console.log(res.data);
+	// 	})
+	// 	.catch((error) => {
+	// 		console.log(error);
+	// 	});
+
+
+
+
+
+	//axios发送delete请求,来删除某个数据
+	// axios.delete("http://localhost:3000/brands/1")
+	// 	.then((res) => {
+	// 		console.log(res.data);
+	// 	})
+	// 	.catch((error) => {
+	// 		console.log(error);
+	// 	});
+
+
+
+
+	//axios发送请求,来实现搜索功能
+	axios.get("http://localhost:3000/brands?name_like=xyz")
+		.then((res) => {
+			console.log(res.data);
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+</script>
+</html>

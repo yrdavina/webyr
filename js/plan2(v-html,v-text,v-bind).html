@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>指令---自己练习</title>
+</head>
+<body>
+	<div id="app">
+		<div v-html="msg"></div>
+		<div v-text="msg"></div>
+		<img v-bind:src="imgSrc">
+	</div>
+</body>
+
+<!-- 引入vuejs文件 -->
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script type="text/javascript">
+	//创建vue实例
+	var vm=new Vue({
+		el:"#app",
+		data:{
+			msg:"<p>你好</p>",    //v-html是直接解析html,相当于innerHTML
+														//v-text是会显示出标签, 相当于innerText,TextContent
+			imgSrc:"../images/monkey.png"    //v-bind可以绑定标签中的任意属性
+		}
+	})
+</script>
+</html>

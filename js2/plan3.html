@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue中的自定义指令</title>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-focus>
+	</div>
+</body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script type="text/javascript">
+	//实例化vue对象
+	
+
+
+	//自定义全局的指令, 用来获取文本框中的焦点
+	//注意: 自定义的指令, 过滤器都要在实例化vue对象之前写
+	
+	Vue.directive("focus",{
+		inserted(el){
+			el.focus();
+		}
+	});
+
+
+	var vm=new Vue({
+		el: "#app"
+	});
+
+</script>
+</html>

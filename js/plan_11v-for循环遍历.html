@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-for是循环遍历</title>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<!-- <li v-for="item in list">{{ item }}</li> -->
+			<li v-for="(item, index) in list">{{ index + 1 }}---{{ item }}</li>
+		</ul>
+	</div>
+</body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	//创建vue实例
+	var vm=new Vue({
+		el: "#app",
+		data: {
+			list: ["小1","小2","小3","小4","小5"]
+		}
+	});
+</script>
+</html>

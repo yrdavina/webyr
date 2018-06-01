@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-once只渲染一次</title>
+</head>
+<body>
+	<div id="app">
+		<div v-once>{{ message }}</div>
+	</div>
+</body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script type="text/javascript">
+	//实例化vue对象
+	var vm=new Vue({
+		el: "#app",
+		data: {
+			message:"面试要加油呀!"
+		}
+	});
+</script>
+</html>

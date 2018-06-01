@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-bind绑定类样式(对象的形式)</title>
+	<style type="text/css">
+		.red{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="app" v-bind:class="{red:isRed}">小红</div>
+
+
+	
+</body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+	<script type="text/javascript">
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				isRed:true,    //active是类名,  后面的isActive是属性
+			}
+		})
+
+		//绑定标签内的任何属性,ok了
+		//绑定类样式(写法有对象的形式, 有数组的形式),  ok了
+		//绑定style(写法有对象形式,  数组形式) ,  ok了
+
+		//v-bind:的简写,  直接:
+	</script>
+</html>

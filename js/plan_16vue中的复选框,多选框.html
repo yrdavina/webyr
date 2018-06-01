@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue中的复选框/多选框</title>
+</head>
+<body>
+	<div id="app">
+		<input type="checkbox" name="" v-model="boxList" value="chinase">语文
+		<input type="checkbox" name="" v-model="boxList" value="math">数学
+		<input type="checkbox" name="" v-model="boxList" value="english">英语
+	</div>
+</body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script type="text/javascript">
+	//实例化vue
+	var vm=new Vue({
+		el: "#app",
+		data: {
+			boxList: ["math","english"]   //复选框/多选框  ,也是根据value的值来决定谁被选中的
+		}
+	})
+</script>
+</html>

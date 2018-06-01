@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    #app {
+      width: 600px;
+      margin: 10px auto;
+    }
+
+    .tb {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .tb th {
+      background-color: #0094ff;
+      color: white;
+    }
+
+    .tb td,
+    .tb th {
+      padding: 5px;
+      border: 1px solid black;
+      text-align: center;
+    }
+
+    .add {
+      padding: 5px;
+      border: 1px solid black;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="add">
+      品牌名称:
+      <input  type="text" v-model="brandName">
+      <input  type="button" value="添加" @click.prevent="handleAdd">
+    </div>
+
+    <div class="add">
+      品牌名称:
+      <input type="text" placeholder="请输入搜索条件" v-model.trim="searchKey">
+    </div>
+
+    <div>
+      <table class="tb">
+        <tr>
+          <th>编号</th>
+          <th>品牌名称</th>
+          <th>创立时间</th>
+          <th>操作</th>
+        </tr>
+        <tr v-for="(item,index) in list" :key="item.id">
+          <td>{{ index +1}}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.date | forDate("YYYY-MM-DD HH:mm:ss") }}</td>
+          <td>
+            <a href="#" @click.prevent="handleDelete(item.id)">删除</a>
+          </td>
+        </tr>
+        <tr v-if="list.length === 0">
+          <td colspan="4">没有品牌数据</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script src="../node_modules/axios/dist/axios.js"></script>
+
+<script src="moment.js"></script>
+
+<script type="text/javascript">
+  //思路: 
+  //1.先是获取页面上的所有数据,  即当页面加载完毕以后发送get请求,去获取页面上的所有数据, 
+      //v-for遍历循环, 过滤器格式化时间
+
+  //2. 删除数据, 即axios发送请求, 根据id来删除, 
+    //在删除的时候, 要使用到拼接id, 我使用模板字符串
+    //先给"删除"按钮绑定点击事件
+    //写删除的方法, 判断是否确定要删除
+    //根据id 来axios发送请求
+    //判断状态码, 如果是200, 说明删除成功, 成功后就要重新刷新页面(就是上面的页面加载完毕的mounted方法)
+
+  //3.添加数据
+    //先给文本框双向绑定数据v-model, 在data中写入数据
+    //然后给"添加"按钮注册点击事件,   然后实现这个点击事件中的方法
+    //然后axios发送post请求,   //判断状态码201,  如果是 表示请求成功
+    //请求成功,此时重新刷新页面,  
+    //最后清空文本框中要添加的数据
+
+
+
+  //4.搜索数据
+    //之前可以使用computed计算属性来实现这个功能,计算属性在书写时有return返回值,  但是现在是axios发送请求了, 异步的, 再出现return就会出问题了
+    //因此就不能再使用计算属性了
+    //要使用侦听器来实现搜索功能
+
+    //先给"搜索"双向绑定数据
+    //在这个时候, 就是要给服务器发送请求了, 使用axios发送
+    //发送请求成功后, 要获取到数据.   重新刷新页面
+
+
+  //通过过滤器格式化时间
+  Vue.filter("forDate",function (value,dateStr){
+    return moment(value).format(dateStr);
+  });
+
+
+  //实例化vue对象
+  var vm=new Vue({
+    el: "#app",
+    mounted(){
+     //调用方法
+     this.loadList();
+    },
+
+    data: {
+      list:[],
+      brandName:"",
+      searchKey:""
+    },
+
+    //各种方法
+    methods: {
+
+      //封装页面加载完毕以后刷新页面的方法
+      loadList(){
+        //页面加载完毕, axios发送请求
+        axios.get("http://localhost:3000/brands")
+          .then((res) => {
+          // console.log(res);
+          //判断状态码,如果是200, 说明请求成功, 可以响应数据
+            if(res.status === 200){
+              this.list=res.data;
+          }
+        })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+
+
+      //删除数据的方法
+      handleDelete(id){
+        //判断提示是否确定删除, 如果不是提示,就返回, 否则就走axios发送删除请求
+        if(!confirm("真的要删除吗")){
+          return; 
+        }
+
+        //
+        //上面已经注册了点击事件, 此时需要axios发送delete的请求了
+        axios.delete(`http://localhost:3000/brands/${id}`)
+          .then((res) => {
+            //判断状态码, 如果是200, 说明请求成功, 重新刷新页面
+            if(res.status === 200){
+              this.loadList();
+            }
+            //否则就提示删除失败
+            else{
+              alert("删除失败");
+            }
+
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+
+
+
+      //添加数据的方法
+      handleAdd(){
+        //判断, 如果当前的brandName长度为0, 那就返回, 要么就axios发送请求
+        if(this.brandName.length == 0){
+          return;
+        }
+
+        //axios发送post请求
+        axios.post("http://localhost:3000/brands",{
+          name: this.brandName,
+          date: new Date()
+        })
+          .then((res) => {
+            //此时判断状态码,如果是201,表示请求发送成功
+            //成功要重新刷新页面
+            if(res.status === 201){
+              this.loadList();
+              //清空文本框中的数据
+              brandName="";
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+
+    },
+
+
+    //搜索的方法
+    //使用的是侦听器, 作用是监听数据的变化
+    watch: {
+      searchKey(newValue,oldValue){
+        //在出现搜索的过程中,其实就已经在给服务器发送请求了   //注意: 参数中必须是新的在前, 旧数据在后
+        //params中就是地址栏后面的模糊查询的参数
+        axios.get("http://localhost:3000/brands",{
+          params: {
+            name_like: newValue
+          }
+
+        })
+          .then((res) => {
+            //获取到数据
+            this.list=res.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      }
+    }
+
+
+
+  });
+</script>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-if条件判断</title>
+</head>
+<body>
+	<div id="app">
+		<span v-if="a === 'A' ">显示A</span>
+	</div>
+</body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script type="text/javascript">
+	var vm=new Vue({
+		el: "#app",
+		data: {
+			a: "A"    //v-show和v-if的区别:  v-show是一直在渲染, 
+					  //只是style样式自己在改变,   v-if是谁要就有谁, 是判断的出现
+		}
+	});
+</script>
+</html>

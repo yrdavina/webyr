@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-model双向数据绑定</title>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model="name">
+	
+		<br>
+
+		{{ name }}
+	</div>
+
+</body>
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script type="text/javascript">
+	//创建vue实例
+	var vm=new Vue({
+		el:"#app",      //v-model可以修改页面内容,  上面输入一行,  下面跟着显示
+		data:{
+			name:""
+		}
+	});
+</script>
+</html>

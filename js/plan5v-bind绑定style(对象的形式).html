@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-bind绑定style(对象的形式)</title>
+</head>
+<body>
+	<div id="app" v-bind:style="{fontSize:fontSize}">style样式</div>
+</body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script type="text/javascript">
+	//实例化vue对象
+	new Vue({
+		el:"#app",
+		data:{
+			
+			fontSize:"30px"     //上面输出时,对象的形式就是,  键:值
+								//注意: 上面定义的是vue中的属性{}中不要有-  必须是驼峰命名,  而下面定义的是style中的属性
+		}
+	})
+</script>
+</html>

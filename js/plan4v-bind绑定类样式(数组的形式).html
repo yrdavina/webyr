@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-bind绑定类样式(数组的形式)--自己练习</title>
+	<style type="text/css">
+		
+		.cl1{
+			color: red;
+		}
+
+		.cl2{
+			font-size: 25px;
+		}
+	</style>
+</head>
+<body>	
+	<div id="app" v-bind:class="[class1,class2]">小小1</div>
+</body>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	//实例化vue对象
+	var vm=new Vue({
+		el:"#app",
+		data:{
+			class1:"cl1",
+			class2:"cl2"
+		}
+	});
+
+
+	//v-bind绑定类样式(数组的语法): 就是  上面是键,   下面有值,   最后样式中添加出来的是类
+</script>
+</html>

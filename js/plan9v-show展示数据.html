@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-show</title>
+</head>
+<body>
+	<div id="app">
+		<button v-on:click="handle">按钮</button>
+		<div v-show="isShow">显示内容/隐藏内容</div>
+	</div>
+</body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script type="text/javascript">
+	var vm=new Vue({
+		el: "#app",
+		data: {
+			isShow:false   //这不是方法, 是数据
+		},
+
+		methods: {
+			handle() {
+				console.log(this);
+				this.isShow = !this.isShow;   //this指的是当前的vue对象
+			}
+		}
+	})
+</script>
+</html>

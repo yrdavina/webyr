@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue中的下拉框</title>
+</head>
+<body>
+	<div id="app">
+		<select v-model="selected">
+			<option value="-1" disabled>请选择</option>
+			<option value="0">燕郊</option>
+			<option value="1">固安</option>
+			<option value="2">大厂回族自治县</option>
+			<option value="3">香河</option>
+		</select>
+
+		<br>
+		{{ selected }}
+	</div>
+</body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script type="text/javascript">
+	//实例化vue对象
+	var vm=new Vue({
+		el: "#app",
+		data: {
+			selected : "2"  //vue中的下拉框,  也是根据value的值来决定谁被选中
+							//disabled是禁选
+		}
+	});
+</script>
+</html>

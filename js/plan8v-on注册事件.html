@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-on注册事件</title>
+	<style type="text/css">
+		
+		.cl1{
+			background-color: red;
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<button v-on:click="addNum">这是一个按钮</button>
+
+		<br>
+
+		<div v-on:mouseover="over" v-bind:class="{cl1:cl1}"></div>
+	</div>
+</body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<script type="text/javascript">
+	//创建vue实例
+	var vm=new Vue({
+		el:"#app",
+		data:{
+
+			cl1: "cl1",	
+		},
+
+		methods: {
+
+			addNum(){
+				//当点击事件的时候, 输出以下内容
+				console.log("v-on注册鼠标点击事件");
+			},
+
+			over(){
+				//当鼠标进入的时候, 输出以下内容
+				console.log("v-on注册鼠标进入事件");    //v-on可以简写成@
+			}
+		}
+	});
+</script>
+</html>
